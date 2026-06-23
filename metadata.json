@@ -1,0 +1,6 @@
+{
+  "name": "Generator & Panduan PMB UNSA",
+  "description": "Aplikasi interaktif untuk merancang, menyesuaikan, mendukung pratinjau, dan menyalin berkas Code.gs dan Index.html untuk Google Apps Script Web App Pendaftaran Mahasiswa Baru (PMB) Universitas Surakarta.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

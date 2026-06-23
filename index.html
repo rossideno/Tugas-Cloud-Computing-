@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <script>
+      (function() {
+        var ignorePattern = /(script error|resizeobserver|cross-origin|extension)/i;
+        window.onerror = function(message, source, lineno, colno, error) {
+          var msg = String(message || "");
+          // Heavily suppress generic Script errors or empty source cross-origin errors
+          if (!source || source === "" || ignorePattern.test(msg) || msg === "Script error." || msg === "Script error") {
+            return true; // Prevent default firing and fully suppress the event
+          }
+          return false;
+        };
+        window.addEventListener('error', function(event) {
+          var msg = String(event.message || (event.error && event.error.message) || "");
+          var src = String(event.filename || "");
+          if (!src || src === "" || ignorePattern.test(msg) || msg === "Script error." || msg === "Script error") {
+            event.stopImmediatePropagation();
+            event.preventDefault();
+          }
+        }, true);
+        window.addEventListener('unhandledrejection', function(event) {
+          var msg = String((event.reason && event.reason.message) || "");
+          if (ignorePattern.test(msg) || msg === "Script error." || msg === "Script error") {
+            event.stopImmediatePropagation();
+            event.preventDefault();
+          }
+        }, true);
+      })();
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Google AI Studio App</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
